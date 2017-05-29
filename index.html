@@ -11,6 +11,8 @@ Released under the MIT license: http://jsbin.mit-license.org
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>JS Bin</title>
 <style id="jsbin-css">
 *{
@@ -42,6 +44,16 @@ body{
   
 }
 
+@media screen and (max-width:420px){
+  .background{
+    width:200px;
+    height:200px;
+    border-radius:40px;
+  }
+}
+
+
+
 .clock{
   width:280px;
   height:280px;
@@ -51,6 +63,15 @@ body{
   position:relative;
   
 }
+@media screen and (max-width:420px){
+  .clock{
+    width:170px;
+    height:170px;
+  }
+}
+
+
+
 .clock > div{
   position:absolute;
 }
@@ -60,13 +81,18 @@ body{
   top:8%;
   font-size:25px;
   color:white;
+  z-index:2;
 }
+
+
+
 .clock > .six{
   transform:translate(-50%,-50%);
   color:white;
   font-size:25px;
   top:93%;
   left:50%;
+  z-index:2;
   /* border:1px solid red; */
 }
 .clock > .three{
@@ -75,6 +101,7 @@ body{
   top:50%;
   font-size:25px;
   color:white;
+  z-index:2;
 }
 .clock > .nine{
   transform:translate(-50%,-50%);
@@ -82,7 +109,25 @@ body{
   top:50%;
   font-size:25px;
   color:white;
+  z-index:2;
 }
+@media screen and (max-width:420px){
+  .clock > .twelve{
+    font-size:16px;
+  }
+  .clock > .six{
+    font-size:16px;
+  }
+  .clock > .three{
+    font-size:16px;
+  }
+  .clock > .nine{
+    font-size:16px;
+  }
+}
+
+
+
 
 
 .clock > .bigRound{
@@ -95,6 +140,14 @@ body{
   left:50%;
   top:50%;
 }
+@media screen and (max-width:420px){
+  .clock > .bigRound{
+    width:110px;
+    height:110px;
+  }
+
+}
+
 .clock > .littleRound{
   width:18px;
   height:18px;
@@ -117,6 +170,19 @@ body{
   left:50%;
   z-index:1;
 }
+@media screen and (max-width:420px){
+  .clock > .littleRound{
+    width:12px;
+    height:12px;
+  }
+  .clock > .center{
+    width:9px;
+    height:9px;
+  }
+}
+
+
+
 .clock > .second{
   height:4px;
   background:red;
@@ -130,6 +196,15 @@ body{
   margin-left:-26px;
   z-index:2;
 }
+@media screen and (max-width:420px){
+  .clock > .second{
+    height:3px;
+    width:90px;
+    margin-left:-18px;
+  }
+}
+
+
 .clock > .minute{
   height:6px;
   background:#DADADA;
@@ -154,6 +229,21 @@ body{
   transform-origin:0 center;
   box-shadow:inset 0 0 2px #B5B6B6,0 0 2px #B4BAC1;
 }
+@media screen and (max-width:420px){
+  .clock > .minute{
+    height:4px;
+    margin-top:-2px;
+  }
+  .clock > .hour{
+    height:6px;
+    margin-top:-3px;
+  }
+}
+
+
+
+
+
 </style>
 </head>
   <style>
