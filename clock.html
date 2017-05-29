@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://js.jirengu.com
+
+Copyright (c) 2017 by limingru (http://js.jirengu.com/wewaj/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body{
+  width:100vw;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-image:
+    radial-gradient(
+      circle,
+      #DEE3E9,
+      #A8AFBF
+    );
+}
+.background{
+  width:350px;
+  height:350px;
+  background:#F5F8FB;
+  border-radius:80px;
+  display:flex;
+  align-items:center;
+  box-shadow:inset 0 0 3px 1px #B6BAC3, 0 0 10px #ACB4C0;
+  
+}
+
+.clock{
+  width:280px;
+  height:280px;
+  background:linear-gradient(#556A85,#343E49);
+  border-radius:50%;
+  margin:0 auto;
+  position:relative;
+  
+}
+.clock > div{
+  position:absolute;
+}
+.clock > .twelve{
+  transform:translate(-50%,-50%);
+  left:50%;
+  top:8%;
+  font-size:25px;
+  color:white;
+}
+.clock > .six{
+  transform:translate(-50%,-50%);
+  color:white;
+  font-size:25px;
+  top:93%;
+  left:50%;
+  /* border:1px solid red; */
+}
+.clock > .three{
+  transform:translate(-50%,-50%);
+  left:93%;
+  top:50%;
+  font-size:25px;
+  color:white;
+}
+.clock > .nine{
+  transform:translate(-50%,-50%);
+  left:7%;
+  top:50%;
+  font-size:25px;
+  color:white;
+}
+
+
+.clock > .bigRound{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:linear-gradient(#415266,#415264);
+  transform:translate(-50%,-50%);
+  box-shadow:inset 0 0 10px #4D6179;
+  left:50%;
+  top:50%;
+}
+.clock > .littleRound{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  box-shadow:0 0 2px #E1E1DF;
+  top:50%;
+  left:50%;
+  z-index:1;
+}
+.clock>.center{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:red;
+  box-shadow:0 0 1px #E1E1DF;
+  top:50%;
+  left:50%;
+  z-index:1;
+}
+.clock > .second{
+  height:4px;
+  background:red;
+  width:130px;
+  top:50%;
+  left:50%;
+  border-radius:2px 2px 2px 2px;
+  margin-top:-2px;
+  transform:rotate(-90deg);
+  transform-origin:20% 50%;
+  margin-left:-26px;
+  z-index:2;
+}
+.clock > .minute{
+  height:6px;
+  background:#DADADA;
+  width:38%;
+  top:50%;
+  left:50%;
+  border-radius:0 3px 3px 0;
+  margin-top:-3px;
+  transform:rotate(-90deg);
+  transform-origin:0 center;
+  box-shadow:0 0 1px #B4BAC1;
+}
+.clock > .hour{
+  height:10px;
+  background:linear-gradient(#FBFCFC,#E7E6E6);
+  width:25%;
+  top:50%;
+  left:50%;
+  border-radius:0 4px 4px 0;
+  margin-top:-4px;
+  transform:rotate(-90deg);
+  transform-origin:0 center;
+  box-shadow:inset 0 0 2px #B5B6B6,0 0 2px #B4BAC1;
+}
+</style>
+</head>
+  <style>
+    .second{
+      transition:all 0.5s;
+      transition-timing-function:cubic-bezier(0.1,2.7,0.58,1);
+    }
+  </style>
+<body>
+    <div class="background">
+      <div class=clock>
+        <div class=twelve>12</div>
+        <div class=six>6</div>
+        <div class=three>3</div>
+        <div class=nine>9</div>
+        <div class="bigRound"></div>
+        <div class="littleRound"></div>
+        <div class="center"></div>
+        <div class="second"></div>
+        <div class="minute"></div>
+        <div class="hour"></div>
+      </div>
+    </div>
+    
+  
+<script id="jsbin-javascript">
+
+function getTime(){
+  var now = new Date()
+  var seconds = now.getSeconds()
+  var minutes = now.getMinutes()
+  var hours = now.getHours()
+console.log(minutes)
+  if(hours > 12){
+    hours -= 12
+  }
+
+  var secondsDeg = 360/60 * seconds
+  var minutesDeg = 360/3600 * (minutes*60+seconds)
+  var hoursDeg = 360/(3600*12) * (hours*3600+minutes*60+seconds)
+
+  document.querySelector('.second').style.transform = `rotate(${-90+secondsDeg}deg)`
+  document.querySelector('.minute').style.transform = `rotate(${-90+minutesDeg}deg)`
+  console.log('起始的minute: ',document.querySelector('.minute').style.transform)
+  document.querySelector('.hour').style.transform = `rotate(${-90+hoursDeg}deg)`
+}
+
+
+
+function run(){
+  var lastSecond = document.querySelector('.second').style.transform
+  var secondIndex = lastSecond.indexOf('(')
+  var secondIndex2 = lastSecond.indexOf('deg)')
+  var numberString = lastSecond.substring(secondIndex+1,secondIndex2)
+  document.querySelector('.second').style.transform = `rotate(${+numberString+6}deg)`
+  console.log('second的数字: ',document.querySelector('.second').style.transform)
+
+
+  var lastMinute = document.querySelector('.minute').style.transform
+  console.log('lastMinute: ',lastMinute)
+  var minuteIndex = lastMinute.indexOf('(')
+  var minuteIndex2 = lastMinute.indexOf('deg)')
+  var numberString2 = lastMinute.substring(minuteIndex+1,minuteIndex2)
+  document.querySelector('.minute').style.transform = `rotate(${+numberString2+0.1}deg)`
+  console.log('run里minute的rotate: ',document.querySelector('.minute').style.transform )
+
+  var lastHour = document.querySelector('.hour').style.transform
+  var hourIndex = lastHour.indexOf('(')
+  var hourIndex2 = lastHour.indexOf('deg)')
+  var numberString3 = lastHour.substring(hourIndex+1,hourIndex2)
+//   console.log('numberString3: ',numberString3)
+  document.querySelector('.hour').style.transform =`rotate(${+numberString3+0.008333333333}deg)`
+}
+
+
+getTime()
+setInterval(function(){
+  run()
+},1000)
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
